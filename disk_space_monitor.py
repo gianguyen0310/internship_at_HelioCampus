@@ -15,8 +15,8 @@ path = ""
 alert_threshold= 0.25
 
 # STEP 3: Set up the senders and receivers for your email alert
-send_from_email= "product@heliocampus.com"
-send_to_email= "zack.nguyen@heliocampus.com"
+send_from_email= "sample_email@abc.com"
+send_to_email= "sample_email_2@abc.com"
 
 # STEP 4: Run the script and check the result
 # Define function to monitor disk space and send alert email
