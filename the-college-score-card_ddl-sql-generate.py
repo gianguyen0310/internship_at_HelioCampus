@@ -4,7 +4,7 @@ import time
 
 start= time.time() # set a start point to measure the elapsed time it take to run script
 
-input_path= r'D:\Users\znguyen\CollegeScorecard_Raw_Data_01192021\Cleaned Data Files'
+input_path= r'D:\Users\sample_user\CollegeScorecard_Raw_Data_01192021\Cleaned Data Files'
 for subdir, dirs, files in os.walk(input_path):
     for file in files:
         subprocess.run(f'csvsql -i postgresql {file}', cwd= input_path)
