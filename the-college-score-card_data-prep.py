@@ -13,13 +13,13 @@ start= time.time() # set a start point to measure the elapsed time it take to ru
 ### NOTE: CHANGE THE INPUT and OUTPUT directory at line 15, 21 as well as the path to the data dictionary at line 18
 
 # Path to the folder that contains raw data (Raw Data Files)
-input_path = r'D:\Users\znguyen\CollegeScorecard_Raw_Data_01192021\Raw Data Files'
+input_path = r'D:\Users\sample_user\CollegeScorecard_Raw_Data_01192021\Raw Data Files'
 
 # Path to the data dictionary (the data dictionary would be downloaded separately, not in the raw data Zip file)
-path_to_data_dictionary= r'D:\Users\znguyen\CollegeScorecard_Raw_Data_01192021\collegescorecarddatadictionary_2021-04-01.xlsx'
+path_to_data_dictionary= r'D:\Users\sample_user\CollegeScorecard_Raw_Data_01192021\collegescorecarddatadictionary_2021-04-01.xlsx'
 
 # Create a folder named "Cleaned Data Files" to store output files
-output_path= r'D:\Users\znguyen\CollegeScorecard_Raw_Data_01192021\Cleaned Data Files'
+output_path= r'D:\Users\sample_user\CollegeScorecard_Raw_Data_01192021\Cleaned Data Files'
 if not os.path.exists(output_path):
     os.mkdir(output_path)
 
@@ -1677,8 +1677,8 @@ for category in range(len(variable_in_each_category)):
 
 
 ## Import all files in output_path ("Cleaned Data Files" folder) to AWS S3
-s3_bucket= "helio-temp" # change the bucket name
-profile_name= "helio-temp-user" # change the profile name
+s3_bucket= "sample_bucket" # change the bucket name
+profile_name= "sample_user" # change the profile name
 
 # Create a function to upload all files in a directory to a S3 bucket
 def upload_files_to_s3(path):
