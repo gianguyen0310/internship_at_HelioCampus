@@ -57,10 +57,10 @@ for filename in field_of_study_files:
 field_of_study_data = pd.concat(field_of_study_list, axis=0, ignore_index=True)
 
 # Write to a csv file
-field_of_study_data.to_csv(f'{output_path}/field_of_study_data.csv', index= False, header= True)
+field_of_study_data.to_csv(f'{output_path}/tcsc_field_of_study.csv', index= False, header= True)
 
 # Write to a parquet file (for easy DDL SQL generate)
-field_of_study_data.to_parquet(f'{output_path}/field_of_study_data.parquet')
+field_of_study_data.to_parquet(f'{output_path}/tcsc_field_of_study.parquet')
 
 
 
@@ -1655,30 +1655,42 @@ variable_in_each_category= institution_data_dictionary.groupby('dev-category')['
 
 # Split the "institution_level_data" into 10 data frames based on 10 "dev-category"
 for category in range(len(variable_in_each_category)):
-    subset_data= institution_level_data[variable_in_each_category[category]]
+    if category != 7: # remove "root" category (root has index = 7 in the variable_in_each_category list)
+        subset_data= institution_level_data[variable_in_each_category[category]]
 
-    # Keep the "ACAD_YR" and "UNITID" columns from the original data set for each of the subset data
-    subset_data['ACAD_YR']= institution_level_data.loc[:, 'ACAD_YR']
-    subset_data['UNITID']= institution_level_data.loc[:, 'UNITID']
+        # Keep the "ACAD_YR" and "UNITID" columns from the original data set for each of the subset data
+        subset_data['ACAD_YR']= institution_level_data.loc[:, 'ACAD_YR']
+        subset_data['UNITID']= institution_level_data.loc[:, 'UNITID']
 
-    # Move these two columns to the first and second position for JOINING purpose
-    first_column= subset_data.pop('ACAD_YR')
-    second_column= subset_data.pop('UNITID')
-    subset_data.insert(0, 'ACAD_YR', first_column)
-    subset_data.insert(1, 'UNITID', second_column)
+        # Keep the "OPEID", "OPEID6" and "FEDSCHCD" columns from the "root" category for each of the subset_data
+        subset_data['OPEID']= institution_level_data.loc[:, 'OPEID']
+        subset_data['OPEID6']= institution_level_data.loc[:, 'OPEID6']
+        subset_data['FEDSCHCD']= institution_level_data.loc[:, 'FEDSCHCD']
 
-    # Create a variable to store category name
-    category_name= variable_in_each_category.reset_index()['dev-category'][category]
+        # Move these 5 common columns to the front for JOINING purpose
+        first_column= subset_data.pop('ACAD_YR')
+        second_column= subset_data.pop('UNITID')
+        third_column= subset_data.pop('OPEID')
+        fourth_column= subset_data.pop('OPEID6')
+        fifth_column= subset_data.pop('FEDSCHCD')
+        subset_data.insert(0, 'ACAD_YR', first_column)
+        subset_data.insert(1, 'UNITID', second_column)
+        subset_data.insert(2, 'OPEID', third_column)
+        subset_data.insert(3, 'OPEID6', fourth_column)
+        subset_data.insert(4, 'FEDSCHCD', fifth_column)
 
-    # Un-comment 2 lines below if you want to see what is in each subset_data
-    #print(category_name)
-    #print(subset_data)
+        # Create a variable to store category name
+        category_name= variable_in_each_category.reset_index()['dev-category'][category]
 
-    # Write to 10 csv files
-    subset_data.to_csv(f'{output_path}/institution_level_data_{category_name}.csv', index=False, header=True)
+        #Un-comment 2 lines below if you want to see what is in each subset_data
+        #print(category_name)
+        #print(subset_data.head())
 
-    # Write to 10 parquet files (for easy DDL SQL generate)
-    subset_data.to_parquet(f'{output_path}/institution_level_data_{category_name}.parquet')
+        # Write to 9 csv files
+        subset_data.to_csv(f'{output_path}/tcsc_institution_level_{category_name}.csv', index=False, header=True)
+
+        # Write to 9 parquet files (for easy DDL SQL generate)
+        subset_data.to_parquet(f'{output_path}/tcsc_institution_level_{category_name}.parquet')
 
 
 
