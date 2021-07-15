@@ -10,22 +10,22 @@ pd.set_option("display.max_rows", None, "display.max_columns", None, 'display.ma
 start= time.time() # set a start point to measure the elapsed time it take to run script
 
 # NOTE: change 9 variables below if necessary
-db_host= 'hel-usv-rs-01.czdfud3udllw.us-east-1.redshift.amazonaws.com'
-db_name= 'heldb'
-user= 'bi_usr'
-password= 'F&B@ww$LA@CRC5z#'
-path_to_data_dictionary= r'D:\Users\znguyen\CollegeScorecard_Raw_Data_01192021\collegescorecarddatadictionary_2021-04-01.xlsx'
+db_host= 'sample-host.us-east-1.redshift.amazonaws.com'
+db_name= 'sample_db'
+user= 'sample_user'
+password= 'sample_password'
+path_to_data_dictionary= r'D:\Users\sample_user\CollegeScorecard_Raw_Data_01192021\collegescorecarddatadictionary_2021-04-01.xlsx'
 corresponding_redshift_table_for_field_of_study_data_dictionary= 'tcsc_field_of_study'
 corresponding_redshift_table_institution_level_data_dictionary= 'tcsc_institution_level'
-write_to_schema= 'edwutil'
-write_to_table= 'data_definitions_third_party'
+write_to_schema= 'sample_schema'
+write_to_table= 'sample_table'
 
 # Create a Redshift connection
 con_redshift = redshift_connector.connect(host= db_host, database= db_name, user= user, password= password)
 
 # Read the "data_definitions" table in the "edwutil" schema
-data_definitions = wr.redshift.read_sql_table(table="data_definitions",
-                                              schema="edwutil",
+data_definitions = wr.redshift.read_sql_table(table="sample_table",
+                                              schema="sample_schema",
                                               con= con_redshift
                                              )
 
