@@ -54,7 +54,11 @@ for filename in field_of_study_files:
     field_of_study_list.append(temp_df)
 
 # Concat 3 data frames into one data frame "field_of_study_data"
-field_of_study_data = pd.concat(field_of_study_list, axis=0, ignore_index=True)
+# Also check if these 3 data frames have same columns
+if all([len(field_of_study_list[0].columns.intersection(df.columns)) == field_of_study_list[0].shape[1] for df in field_of_study_list]):
+   field_of_study_data = pd.concat(field_of_study_list, axis=0, ignore_index=True)
+else:
+   print('Not all "temp_df" has the same columns')
 
 # Write to a csv file
 field_of_study_data.to_csv(f'{output_path}/tcsc_field_of_study.csv', index= False, header= True)
@@ -1633,7 +1637,11 @@ for filename in institution_level_files:
     institution_level_list.append(temp_df)
 
 # Concat 23 data frames into one data frame "institution_level_data"
-institution_level_data = pd.concat(institution_level_list, axis=0, ignore_index=True)
+# Also check if these 23 data frames have same columns
+if all([len(institution_level_list[0].columns.intersection(df.columns)) == institution_level_list[0].shape[1] for df in institution_level_list]):
+   institution_level_data = pd.concat(institution_level_list, axis=0, ignore_index=True)
+else:
+   print('Not all "temp_df" has the same columns')
 
 # Split the "institution_level_data" into 10 data frames because the number of columns exceed Redshift limit 1600 columns
 # Columns will be split based on the "dev-category" in the data dictionary
