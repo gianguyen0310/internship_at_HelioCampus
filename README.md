@@ -7,3 +7,5 @@ The "the-college-score-card_data-prep.py" script is used to automate the process
 The "the-college-score-card_ddl-sql-generate" script is used to generate the DDL SQL "Create Table" command Redshift and also the COPY command to dump data from S3 to Redshift
 \
 The "the-college-scorecard_data-dictionary" script is used to prep the data dictionary, concat and prepare it to match the destination table in Redshift, then bulk insert into Redshift table
+\
+The "tableau_server_auto_download" script is used to retrieve all available version of Tableau download page, download link, auto download a desired version
