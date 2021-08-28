@@ -13,7 +13,7 @@ start= time.time()
 wanted_year= list(range(2019, 2021, 1)) # end year must be +1. For example, if we want 2018-2020, then range(2018,2021,1)
 
 # Set default download directory
-download_directory= r"D:\Users\znguyen\test"
+download_directory= r"D:\Users\test-user\test"
 
 # Set IPEDS base URL
 base_url = "https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx?goToReportId=7"
