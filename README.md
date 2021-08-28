@@ -8,4 +8,6 @@ The "the-college-score-card_ddl-sql-generate" script is used to generate the DDL
 \
 The "the-college-scorecard_data-dictionary" script is used to prep the data dictionary, concat and prepare it to match the destination table in Redshift, then bulk insert into Redshift table\
 \
-The "tableau_server_auto_download" script is used to retrieve all available version of Tableau download page, download link, auto download a desired version
+The "tableau_server_auto_download" script is used to retrieve all available version of Tableau download page, download link, auto download a desired version\
+\
+The 'ipeds_auto_download" script is used to automate download IPEDS data
